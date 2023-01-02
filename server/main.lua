@@ -180,13 +180,6 @@ local function GiveCarParts(id)
         TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["axleparts"], 'add', 2)
         Citizen.Wait(500)
          --
-        Player.Functions.AddItem("sparetire", 2)
-        TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["sparetire"], 'add', 2)
-        Citizen.Wait(500)
-         --
-        Player.Functions.AddItem("noscan", 1)
-        TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["noscan"], 'add', 1)
-        Citizen.Wait(500)
 
         if math.random(1, 8) == math.random(1, 10) then
             Player.Functions.AddItem("turbo", 1)

@@ -142,7 +142,8 @@ INSERT INTO
 - `management_funds` (`job_name`, `amount`, `type`) VALUES ('scrapyard', '0', 'boss');
 ```
 
-### Add in `resources/[qb]/qb-management/client/cl_config.lua` in `Config.BossMenus`
+### Add in 
+- `resources/[qb]/qb-management/client/cl_config.lua` in `Config.BossMenus`
 ```lua
 ['scrapyard'] = {
     vector3(2338.6497, 3125.4343, 48.2087),

@@ -95,13 +95,15 @@
 - But if a item is not there anymore than players can't buy it, and you must add more in your shop stash.
 
 
-## If you don't have this then add this in `qb-management/server/sv_boss.lua` at around line 36 
+## If you don't have this then add this in 
+- `qb-management/server/sv_boss.lua` at around line 36 
 - NOTE: below the AddMoney function.
 ```lua
 exports('AddMoney', AddMoney)
 ```
 
-## Add in qb-core shared items, so we can sell items to other players
+## Add in 
+- qb-core shared items, so we can sell items to other players
 ```lua
 	-- mh-scrapyardjob items
 	["engine1"]=            {["name"] = "engine1",			["label"] = "Niveau 1 Motor",	    	["weight"] = 0, ["type"] = "item",  ["image"] = "engine1.png",          ["unique"] = false,  ["useable"] = true, ["shouldClose"] = true, ["description"] = ""},
@@ -136,7 +138,8 @@ exports('AddMoney', AddMoney)
 
 ### Add in database
 ```sql
-INSERT INTO `management_funds` (`job_name`, `amount`, `type`) VALUES ('scrapyard', '0', 'boss');
+INSERT INTO 
+- `management_funds` (`job_name`, `amount`, `type`) VALUES ('scrapyard', '0', 'boss');
 ```
 
 ### Add in `resources/[qb]/qb-management/client/cl_config.lua` in `Config.BossMenus`
@@ -146,14 +149,16 @@ INSERT INTO `management_funds` (`job_name`, `amount`, `type`) VALUES ('scrapyard
 },
 ```
 
-### Add in `resources/[qb]/qb-management/client/cl_config.lua` in `Config.BossMenuZones`
+### Add in 
+- `resources/[qb]/qb-management/client/cl_config.lua` in `Config.BossMenuZones`
 ```lua
 ['scrapyard'] = {
     { coords = vector3(2338.6497, 3125.4343, 48.2087), length = 1.15, width = 2.6, heading = 84.9378, minZ = 47.0, maxZ = 50.0 },
 },
 ```
 
-### Shared `resources/[qb]/qb-core/shared/jobs.lua`
+### Shared 
+- `resources/[qb]/qb-core/shared/jobs.lua`
 ```lua
 ['scrapyard'] = {
 	label = 'Scrapyard',
@@ -185,7 +190,8 @@ INSERT INTO `management_funds` (`job_name`, `amount`, `type`) VALUES ('scrapyard
 },
 ```
 
-### Add in `resources/[qb]/qb-radialmenu/config.lua` in `Config.JobInteractions`
+### Add in 
+- `resources/[qb]/qb-radialmenu/config.lua` in `Config.JobInteractions`
 - So we can use the F1 menu
 ```lua
     ['scrapyard'] = {

@@ -83,6 +83,7 @@ local Translations = {
         ['wrong_vehicle'] = "Je bent niet met het juiste voertuig terug gekomen.",
         ['not_your_own_property'] = "Je kunt het voertuig alleen op eigen terrein parkeren!",
         ['only_remove_on_own_property'] = "Je kunt de voertuig alleen op je eigen terrein uit de stalling halen",
+        ['player_needby'] = "Je kunt niet beginnen met scrappen omdat er een speler te dicht bij je in de buurt staat",
     },
     police = {
         ['notify_title'] = "Grote Afval Dumping",

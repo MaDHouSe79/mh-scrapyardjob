@@ -706,6 +706,8 @@ local function ScrapNPCVehicle()
             end
         end
     else
+	Reset()
+        ResetMission()
         QBCore.Functions.Notify(Lang:t('notify.player_needby'), "error")
     end
 end
@@ -765,6 +767,8 @@ local function DeleteMyVehicle()
             end
         end
     else
+	Reset()
+        ResetMission()
         QBCore.Functions.Notify(Lang:t('notify.player_needby'), "error")
     end
 end
@@ -877,6 +881,8 @@ local function StealNPCVehicle()
             end
         end
     else
+	Reset()
+        ResetMission()
         QBCore.Functions.Notify(Lang:t('notify.player_needby'), "error")
     end
 end

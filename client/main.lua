@@ -631,204 +631,225 @@ local function DropVehicle()
     end
 end
 
+local function IsAPlayerAround()
+    local isAround = false
+    local closestPlayer, closestDistance QBCore.Functions.GetClosestPlayer(GetEntityCoords(PlayerPedId()))
+    if closestDistance < 10.0 and closestPlayer ~= PlayerPedId() then
+        isAround = true
+    end
+    return isAround
+end
 
 local function ScrapNPCVehicle()
-    tmpVehicle = nil
-    local veh, distance = QBCore.Functions.GetClosestVehicle(GetEntityCoords(PlayerPedId()))
-    if veh ~= nil then
-        if distance <= Config.InteractDistance then
-            if IsBlackListedVehicle(GetVehicleClass(veh)) then 
-                QBCore.Functions.Notify(Lang:t('notify.vehicle_is_blacklisted'), "error", 5000)
-                isScrapBusy = false
-                Reset()
-            else
-                local props = QBCore.Functions.GetVehicleProperties(veh)
-                QBCore.Functions.TriggerCallback("mh-scrapyardjob:server:hasItems", function(count)
-                    if count == #Config.NeededItems['scrapping'] then
-                        QBCore.Functions.TriggerCallback("mh-scrapyardjob:server:hasOwner", function(hasOwner)
-                            if hasOwner then
-                                QBCore.Functions.Notify(Lang:t('notify.can_not_steel_player_vehicle'), "error", 5000)
-                                isScrapBusy = false
-                            else
-                                tmpVehicle = veh
-                                TaskLookAtEntity(veh, PlayerPedId(), -1)
-                                isScrapBusy = true
-                                scrapTime = math.random(Config.DestroyTime, 60000)
-                                OpenAllDoors(veh)
-                                TaskStartScenarioInPlace(PlayerPedId(), "WORLD_HUMAN_WELDING", 0, true)
-                                isStarted = true
-                                QBCore.Functions.Progressbar("scrap_vehicle", Lang:t('progressbar.demolish'), scrapTime, false, true, {
-                                    disableMovement = true,
-                                    disableCarMovement = true,
-                                    disableMouse = false,
-                                    disableCombat = true,
-                                }, {}, {}, {}, function() -- Done
-                                    ClearAreaOfObjects(GetEntityCoords(PlayerPedId()), 10.0, 0)
-                                    ClearPedTasks(PlayerPedId())
-                                    ClearAllPedProps(PlayerPedId())
-                                    SetEntityAsMissionEntity(veh, true, true)
-                                    RunCoolDown()
-                                    TriggerServerEvent('mh-scrapyardjob:server:RemoveItems', 'scrapping')
-                                    currentDropzone = math.random(1, #Config.Zones[currentBase]['drops'])
-                                    currentMissionCoords = Config.Zones[currentBase]['drops'][currentDropzone].coords
-                                    dropLoc = Config.Zones[currentBase]['drops'][currentDropzone].drop
-                                    backLoc = Config.Mission.home.coords
-                                    destroyVehicle = veh
-                                    local vehicleData = {
-                                        model = Config.Mission.vehicle.model,
-                                        plate = Config.Mission.vehicle.plate,
-                                        spawnpoint = Config.Mission.vehicle.spawnpoint,
-                                        heading = Config.Mission.vehicle.heading,
-                                    }
-                                    TakeOutVehicle(vehicleData, false)
-                                    Citizen.Wait(500)
-                                    AttachEntityToEntity(veh, missionVehicle, 20, Config.Mission.vehicle.offset.x, Config.Mission.vehicle.offset.y, Config.Mission.vehicle.offset.z, 0.0, 0.0, 0.0, false, false, false, false, 20, true)
-                                end, function() -- Cancel
-                                    Reset()
-                                    QBCore.Functions.Notify(Lang:t('notify.cancel'), "error")
-                                end)
-                            end
-                        end, props.plate)
-                    else
-                        GetRequiredItems("scrapping")
-                    end
-                end, 'scrapping')
+    if not IsAPlayerAround() then
+        tmpVehicle = nil
+        local veh, distance = QBCore.Functions.GetClosestVehicle(GetEntityCoords(PlayerPedId()))
+        if veh ~= nil then
+            if distance <= Config.InteractDistance then
+                if IsBlackListedVehicle(GetVehicleClass(veh)) then 
+                    QBCore.Functions.Notify(Lang:t('notify.vehicle_is_blacklisted'), "error", 5000)
+                    isScrapBusy = false
+                    Reset()
+                else
+                    local props = QBCore.Functions.GetVehicleProperties(veh)
+                    QBCore.Functions.TriggerCallback("mh-scrapyardjob:server:hasItems", function(count)
+                        if count == #Config.NeededItems['scrapping'] then
+                            QBCore.Functions.TriggerCallback("mh-scrapyardjob:server:hasOwner", function(hasOwner)
+                                if hasOwner then
+                                    QBCore.Functions.Notify(Lang:t('notify.can_not_steel_player_vehicle'), "error", 5000)
+                                    isScrapBusy = false
+                                else
+                                    tmpVehicle = veh
+                                    TaskLookAtEntity(veh, PlayerPedId(), -1)
+                                    isScrapBusy = true
+                                    scrapTime = math.random(Config.DestroyTime, 60000)
+                                    OpenAllDoors(veh)
+                                    TaskStartScenarioInPlace(PlayerPedId(), "WORLD_HUMAN_WELDING", 0, true)
+                                    isStarted = true
+                                    QBCore.Functions.Progressbar("scrap_vehicle", Lang:t('progressbar.demolish'), scrapTime, false, true, {
+                                        disableMovement = true,
+                                        disableCarMovement = true,
+                                        disableMouse = false,
+                                        disableCombat = true,
+                                    }, {}, {}, {}, function() -- Done
+                                        ClearAreaOfObjects(GetEntityCoords(PlayerPedId()), 10.0, 0)
+                                        ClearPedTasks(PlayerPedId())
+                                        ClearAllPedProps(PlayerPedId())
+                                        SetEntityAsMissionEntity(veh, true, true)
+                                        RunCoolDown()
+                                        TriggerServerEvent('mh-scrapyardjob:server:RemoveItems', 'scrapping')
+                                        currentDropzone = math.random(1, #Config.Zones[currentBase]['drops'])
+                                        currentMissionCoords = Config.Zones[currentBase]['drops'][currentDropzone].coords
+                                        dropLoc = Config.Zones[currentBase]['drops'][currentDropzone].drop
+                                        backLoc = Config.Mission.home.coords
+                                        destroyVehicle = veh
+                                        local vehicleData = {
+                                            model = Config.Mission.vehicle.model,
+                                            plate = Config.Mission.vehicle.plate,
+                                            spawnpoint = Config.Mission.vehicle.spawnpoint,
+                                            heading = Config.Mission.vehicle.heading,
+                                        }
+                                        TakeOutVehicle(vehicleData, false)
+                                        Citizen.Wait(500)
+                                        AttachEntityToEntity(veh, missionVehicle, 20, Config.Mission.vehicle.offset.x, Config.Mission.vehicle.offset.y, Config.Mission.vehicle.offset.z, 0.0, 0.0, 0.0, false, false, false, false, 20, true)
+                                    end, function() -- Cancel
+                                        Reset()
+                                        QBCore.Functions.Notify(Lang:t('notify.cancel'), "error")
+                                    end)
+                                end
+                            end, props.plate)
+                        else
+                            GetRequiredItems("scrapping")
+                        end
+                    end, 'scrapping')
+                end
             end
         end
+    else
+        QBCore.Functions.Notify(Lang:t('notify.player_needby'), "error")
     end
 end
 
 local function DeleteMyVehicle()
-    tmpVehicle = nil
-    local veh, distance = QBCore.Functions.GetClosestVehicle(GetEntityCoords(PlayerPedId()))
-    if veh ~= nil then
-        if distance <= Config.InteractDistance then
-            if IsBlackListedVehicle(GetVehicleClass(veh)) then 
-                QBCore.Functions.Notify(Lang:t('notify.vehicle_is_blacklisted'), "error", 5000)
-                isScrapBusy = false
-                Reset()
-            else
-                local props = QBCore.Functions.GetVehicleProperties(veh)
-                QBCore.Functions.TriggerCallback("mh-scrapyardjob:server:hasItems", function(count)
-                    if count == #Config.NeededItems['deleting'] then
-                        QBCore.Functions.TriggerCallback("mh-scrapyardjob:server:isOwner", function(isOwner)
-                            if isOwner then
-                                tmpVehicle = veh
-                                scrapTime = math.random(Config.DestroyTime, 60000)   
-                                TaskLookAtEntity(veh, PlayerPedId(), -1)
-                                isScrapBusy = true
-                                OpenAllDoors(veh)
-                                TaskStartScenarioInPlace(PlayerPedId(), "WORLD_HUMAN_WELDING", 0, true)
-                                isStarted = true
-                                QBCore.Functions.Progressbar("delete_vehicle", Lang:t('progressbar.demolish'), scrapTime, false, true, {
-                                    disableMovement = true,
-                                    disableCarMovement = true,
-                                    disableMouse = false,
-                                    disableCombat = true,
-                                }, {}, {}, {}, function() -- Done
-                                    ClearAreaOfObjects(GetEntityCoords(PlayerPedId()), 10.0, 0)
-                                    ClearPedTasks(PlayerPedId())             
-                                    ClearAllPedProps(PlayerPedId())
-                                    TriggerServerEvent('mh-scrapyardjob:server:RemoveItems', 'deleting')
-                                    TriggerServerEvent("mh-scrapyardjob:server:DeleteMyVehicle", veh, props.plate)
-                                    SetEntityAsMissionEntity(veh, true, true)
-                                    RunCoolDown()
-                                    DeleteVehicle(veh)
-                                    QBCore.Functions.Notify(Lang:t('notify.vehicle_is_destroyed'), "success")
-                                    Reset()
-                                end, function() -- Cancel
-                                    Reset()
-                                    QBCore.Functions.Notify(Lang:t('notify.cancel'), "error")
-                                end)
-                            else
-                                QBCore.Functions.Notify(Lang:t('notify.not_the_owner'), "error")
-                            end
-                        end, props.plate)
-                    else
-                        GetRequiredItems("deleting")
-                    end
-                end, 'deleting')
+    if not IsAPlayerAround() then
+        tmpVehicle = nil
+        local veh, distance = QBCore.Functions.GetClosestVehicle(GetEntityCoords(PlayerPedId()))
+        if veh ~= nil then
+            if distance <= Config.InteractDistance then
+                if IsBlackListedVehicle(GetVehicleClass(veh)) then 
+                    QBCore.Functions.Notify(Lang:t('notify.vehicle_is_blacklisted'), "error", 5000)
+                    isScrapBusy = false
+                    Reset()
+                else
+                    local props = QBCore.Functions.GetVehicleProperties(veh)
+                    QBCore.Functions.TriggerCallback("mh-scrapyardjob:server:hasItems", function(count)
+                        if count == #Config.NeededItems['deleting'] then
+                            QBCore.Functions.TriggerCallback("mh-scrapyardjob:server:isOwner", function(isOwner)
+                                if isOwner then
+                                    tmpVehicle = veh
+                                    scrapTime = math.random(Config.DestroyTime, 60000)   
+                                    TaskLookAtEntity(veh, PlayerPedId(), -1)
+                                    isScrapBusy = true
+                                    OpenAllDoors(veh)
+                                    TaskStartScenarioInPlace(PlayerPedId(), "WORLD_HUMAN_WELDING", 0, true)
+                                    isStarted = true
+                                    QBCore.Functions.Progressbar("delete_vehicle", Lang:t('progressbar.demolish'), scrapTime, false, true, {
+                                        disableMovement = true,
+                                        disableCarMovement = true,
+                                        disableMouse = false,
+                                        disableCombat = true,
+                                    }, {}, {}, {}, function() -- Done
+                                        ClearAreaOfObjects(GetEntityCoords(PlayerPedId()), 10.0, 0)
+                                        ClearPedTasks(PlayerPedId())             
+                                        ClearAllPedProps(PlayerPedId())
+                                        TriggerServerEvent('mh-scrapyardjob:server:RemoveItems', 'deleting')
+                                        TriggerServerEvent("mh-scrapyardjob:server:DeleteMyVehicle", veh, props.plate)
+                                        SetEntityAsMissionEntity(veh, true, true)
+                                        RunCoolDown()
+                                        DeleteVehicle(veh)
+                                        QBCore.Functions.Notify(Lang:t('notify.vehicle_is_destroyed'), "success")
+                                        Reset()
+                                    end, function() -- Cancel
+                                        Reset()
+                                        QBCore.Functions.Notify(Lang:t('notify.cancel'), "error")
+                                    end)
+                                else
+                                    QBCore.Functions.Notify(Lang:t('notify.not_the_owner'), "error")
+                                end
+                            end, props.plate)
+                        else
+                            GetRequiredItems("deleting")
+                        end
+                    end, 'deleting')
+                end
             end
         end
+    else
+        QBCore.Functions.Notify(Lang:t('notify.player_needby'), "error")
     end
 end
 
 local function StealNPCVehicle()
-    local veh, distance = QBCore.Functions.GetClosestVehicle(GetEntityCoords(PlayerPedId()))
-    if veh ~= nil then
-        if distance <= Config.InteractDistance then
-            if IsBlackListedVehicle(GetVehicleClass(veh)) then 
-                QBCore.Functions.Notify(Lang:t('notify.vehicle_is_blacklisted'), "error", 5000)
-                isScrapBusy = false
-                Reset()
-            else
-                local props = QBCore.Functions.GetVehicleProperties(veh)
-                local displaytext = GetDisplayNameFromVehicleModel(props.model)
-                local body = GetVehicleBodyHealth(veh)
-                if math.floor(body) < Config.MinDamage then
-                    return QBCore.Functions.Notify(Lang:t('notify.to_much_damage'), "error", 5000)
-                end
-                TaskLookAtEntity(veh, PlayerPedId(), -1)
-                QBCore.Functions.TriggerCallback("mh-scrapyardjob:server:hasOwner", function(hasOwner)
-                    if hasOwner then
-                        QBCore.Functions.Notify(Lang:t('notify.can_not_steel_player_vehicle'), "error", 5000)
-                        isScrapBusy = false
-                    else
-                        isScrapBusy = true
-                        QBCore.Functions.TriggerCallback("mh-scrapyardjob:server:hasItems", function(count)
-                            if count == #Config.NeededItems['steeling'] then
-                                OpenAllDoors(veh)
-                                QBCore.Functions.Progressbar("animation1", Lang:t('progressbar.info1'), Config.SteelTime, false, true,{
-                                    disableMovement = true,
-                                    disableCarMovement = true,
-                                    disableMouse = false,
-                                    disableCombat = true,
-                                }, {
-                                    animDict = "anim@amb@business@weed@weed_inspecting_lo_med_hi@",
-                                    anim = "weed_spraybottle_crouch_base_inspector"
-                                }, {}, {}, function() -- Done
-                                    QBCore.Functions.Progressbar("animation2", Lang:t('progressbar.info2'), Config.SteelTime, false, true,{
+    if not IsAPlayerAround() then
+        local veh, distance = QBCore.Functions.GetClosestVehicle(GetEntityCoords(PlayerPedId()))
+        if veh ~= nil then
+            if distance <= Config.InteractDistance then
+                if IsBlackListedVehicle(GetVehicleClass(veh)) then 
+                    QBCore.Functions.Notify(Lang:t('notify.vehicle_is_blacklisted'), "error", 5000)
+                    isScrapBusy = false
+                    Reset()
+                else
+                    local props = QBCore.Functions.GetVehicleProperties(veh)
+                    local displaytext = GetDisplayNameFromVehicleModel(props.model)
+                    local body = GetVehicleBodyHealth(veh)
+                    if math.floor(body) < Config.MinDamage then
+                        return QBCore.Functions.Notify(Lang:t('notify.to_much_damage'), "error", 5000)
+                    end
+                    TaskLookAtEntity(veh, PlayerPedId(), -1)
+                    QBCore.Functions.TriggerCallback("mh-scrapyardjob:server:hasOwner", function(hasOwner)
+                        if hasOwner then
+                            QBCore.Functions.Notify(Lang:t('notify.can_not_steel_player_vehicle'), "error", 5000)
+                            isScrapBusy = false
+                        else
+                            isScrapBusy = true
+                            QBCore.Functions.TriggerCallback("mh-scrapyardjob:server:hasItems", function(count)
+                                if count == #Config.NeededItems['steeling'] then
+                                    OpenAllDoors(veh)
+                                    QBCore.Functions.Progressbar("animation1", Lang:t('progressbar.info1'), Config.SteelTime, false, true,{
                                         disableMovement = true,
                                         disableCarMovement = true,
                                         disableMouse = false,
                                         disableCombat = true,
                                     }, {
-                                        animDict = "mini@repair",
-                                        anim = "fixing_a_ped"
+                                        animDict = "anim@amb@business@weed@weed_inspecting_lo_med_hi@",
+                                        anim = "weed_spraybottle_crouch_base_inspector"
                                     }, {}, {}, function() -- Done
-                                        QBCore.Functions.Progressbar("animation2", Lang:t('progressbar.info3'), Config.SteelTime, false, true,{
+                                        QBCore.Functions.Progressbar("animation2", Lang:t('progressbar.info2'), Config.SteelTime, false, true,{
                                             disableMovement = true,
                                             disableCarMovement = true,
                                             disableMouse = false,
                                             disableCombat = true,
                                         }, {
-                                            animDict = "anim@amb@business@weed@weed_inspecting_lo_med_hi@",
-                                            anim = "weed_spraybottle_crouch_base_inspector"
+                                            animDict = "mini@repair",
+                                            anim = "fixing_a_ped"
                                         }, {}, {}, function() -- Done
-                                            QBCore.Functions.Progressbar("animation3", Lang:t('progressbar.info4'), Config.SteelTime, false, true,{
+                                            QBCore.Functions.Progressbar("animation2", Lang:t('progressbar.info3'), Config.SteelTime, false, true,{
                                                 disableMovement = true,
                                                 disableCarMovement = true,
                                                 disableMouse = false,
                                                 disableCombat = true,
                                             }, {
-                                                animDict = "mini@repair",
-                                                anim = "fixing_a_ped"
+                                                animDict = "anim@amb@business@weed@weed_inspecting_lo_med_hi@",
+                                                anim = "weed_spraybottle_crouch_base_inspector"
                                             }, {}, {}, function() -- Done
-                                                TaskStartScenarioInPlace(PlayerPedId(), 'WORLD_HUMAN_MAID_CLEAN', 0, true)
-                                                QBCore.Functions.Progressbar("animation4", Lang:t('progressbar.info2'), Config.SteelTime, false, true,{
+                                                QBCore.Functions.Progressbar("animation3", Lang:t('progressbar.info4'), Config.SteelTime, false, true,{
                                                     disableMovement = true,
                                                     disableCarMovement = true,
                                                     disableMouse = false,
                                                     disableCombat = true,
-                                                }, {}, {}, {}, function() -- Done
-                                                    ClearAllPedProps(PlayerPedId())
-                                                    ClearPedTasks(PlayerPedId())
-                                                    CloseAllDoors(veh)
-                                                    TriggerServerEvent('mh-scrapyardjob:server:RemoveItems', 'steeling')
-                                                    QBCore.Functions.TriggerCallback("mh-scrapyardjob:server:savenpcvehicle", function(callback)
-                                                    end, {props = props, model = props.model, plate = props.plate, modelname = displaytext:lower(), vehicle = veh}) 
-                                                    RunCoolDown()
-                                                    Reset()
+                                                }, {
+                                                    animDict = "mini@repair",
+                                                    anim = "fixing_a_ped"
+                                                }, {}, {}, function() -- Done
+                                                    TaskStartScenarioInPlace(PlayerPedId(), 'WORLD_HUMAN_MAID_CLEAN', 0, true)
+                                                    QBCore.Functions.Progressbar("animation4", Lang:t('progressbar.info2'), Config.SteelTime, false, true,{
+                                                        disableMovement = true,
+                                                        disableCarMovement = true,
+                                                        disableMouse = false,
+                                                        disableCombat = true,
+                                                    }, {}, {}, {}, function() -- Done
+                                                        ClearAllPedProps(PlayerPedId())
+                                                        ClearPedTasks(PlayerPedId())
+                                                        CloseAllDoors(veh)
+                                                        TriggerServerEvent('mh-scrapyardjob:server:RemoveItems', 'steeling')
+                                                        QBCore.Functions.TriggerCallback("mh-scrapyardjob:server:savenpcvehicle", function(callback)
+                                                        end, {props = props, model = props.model, plate = props.plate, modelname = displaytext:lower(), vehicle = veh}) 
+                                                        RunCoolDown()
+                                                        Reset()
+                                                    end, function() -- Censel
+                                                        Reset()
+                                                        QBCore.Functions.Notify(Lang:t('notify.cancel'), "error")
+                                                    end)
                                                 end, function() -- Censel
                                                     Reset()
                                                     QBCore.Functions.Notify(Lang:t('notify.cancel'), "error")
@@ -844,20 +865,19 @@ local function StealNPCVehicle()
                                     end, function() -- Censel
                                         Reset()
                                         QBCore.Functions.Notify(Lang:t('notify.cancel'), "error")
-                                    end)
-                                end, function() -- Censel
+                                    end)                   
+                                else
+                                    GetRequiredItems("steeling")
                                     Reset()
-                                    QBCore.Functions.Notify(Lang:t('notify.cancel'), "error")
-                                end)                   
-                            else
-                                GetRequiredItems("steeling")
-                                Reset()
-                            end
-                        end, 'steeling')
-                    end
-                end, props.plate)
+                                end
+                            end, 'steeling')
+                        end
+                    end, props.plate)
+                end
             end
         end
+    else
+        QBCore.Functions.Notify(Lang:t('notify.player_needby'), "error")
     end
 end
 

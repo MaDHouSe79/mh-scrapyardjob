@@ -23,7 +23,7 @@ Config.MinDamage = 950.0        -- before a player can use this, the vehicle has
 ---------------------------------------------------------------
 -- a cooldown timer, so players can't use it the hole time. make sure you add at least more than 3600 
 -- (3600 * 60) = 1 min, (230000 * 60) = 1 hour
-Config.CoolDownTime = 3600    -- 1 min
+Config.CoolDownTime = 230000    -- 1 min
 ---------------------------------------------------------------
 Config.InteractDistance = 1.7   -- interact distance
 Config.InteractButton = 38      -- interact key (E)

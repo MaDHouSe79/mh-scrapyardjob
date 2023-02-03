@@ -83,6 +83,7 @@ local Translations = {
         ['wrong_vehicle'] = "You didn't come back with the right vehicle.",
         ['not_your_own_property'] = "You can only park the vehicle on your own property!",
         ['only_remove_on_own_property'] = "You can only remove the vehicle from the storage on your own property",
+        ['player_needby'] = "You cannot start scrapping because a player is too close to you",
     },
     police = {
         ['notify_title'] = "Large Waste Dumping",

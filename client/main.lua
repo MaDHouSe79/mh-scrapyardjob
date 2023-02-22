@@ -633,7 +633,7 @@ end
 
 local function IsAPlayerAround()
     local isAround = false
-    local closestPlayer, closestDistance QBCore.Functions.GetClosestPlayer(GetEntityCoords(PlayerPedId()))
+    local closestPlayer, closestDistance = QBCore.Functions.GetClosestPlayer(GetEntityCoords(PlayerPedId()))
     if closestDistance < 10.0 and closestPlayer ~= PlayerPedId() then
         isAround = true
     end

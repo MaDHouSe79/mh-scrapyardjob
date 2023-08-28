@@ -631,12 +631,28 @@ local function DropVehicle()
     end
 end
 
+local function GetClosestPlayer()
+    local closestPlayers = GetActivePlayers()
+    local closestPlayer = -1
+    local closestDistance = -1
+    for i = 1, #closestPlayers, 1 do
+        if closestPlayers[i] ~= PlayerId() and closestPlayers[i] ~= -1 then
+            local pos = GetEntityCoords(GetPlayerPed(closestPlayers[i]))
+            local distance = #(pos - coords)
+            if closestDistance == -1 or closestDistance > distance then
+                closestPlayer = closestPlayers[i]
+                closestDistance = distance
+            end
+        end
+    end
+    return closestPlayer, closestDistance
+end
+
 local function IsAPlayerAround()
     local isAround = false
-    local closestPlayer, closestDistance = QBCore.Functions.GetClosestPlayer(GetEntityCoords(PlayerPedId()))
-    if closestDistance < 10.0 and closestPlayer ~= PlayerPedId() then
-        isAround = true
-    end
+    local coords = GetEntityCoords(PlayerPedId())
+    local closestPlayer, closestDistance = GetClosestPlayer()
+    if closestPlayer ~= -1 or closestDistance ~= -1 then isAround = true end
     return isAround
 end
 

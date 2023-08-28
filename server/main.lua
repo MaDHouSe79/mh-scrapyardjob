@@ -60,7 +60,9 @@ local function IsAllowed(id)
     elseif IsAuthorizedGang(id) then 
         isAllowed = true 
     elseif IsAuthorizedJob(id) then
-        isAllowed = true end
+        isAllowed = true 
+    end
+    if Config.Access['public'] then isAllowed = true end
     return isAllowed
 end
 

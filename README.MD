@@ -27,8 +27,7 @@
 </p>
 
 # MH-Scrapyardjob
-- With this script, players can steel any npc vehicle,
-- and make this vehicle there own or get row materials or vehicle parts.
+- a player scrapyard job to steel any npc vehicle for parts or materials. 
 
 ### Dependencies
 - [oxmysql](https://github.com/overextended/oxmysql/releases/tag/v1.9.3) (Required)

@@ -344,11 +344,8 @@ INSERT INTO
     }
 ```
 
-### 🐞 Any bugs issues or suggestions, let my know. 👊😎
-
-### 🙈 Youtube & Discord
+### 🙈 Youtube
 - [Youtube](https://www.youtube.com/c/MaDHouSe79)
-- [Discord](https://discord.gg/cEMSeE9dgS)
 
 # LICENSE
 [GPL LICENSE](./LICENSE)<br />

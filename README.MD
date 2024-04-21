@@ -160,32 +160,17 @@ INSERT INTO
 ### Shared 
 - `resources/[qb]/qb-core/shared/jobs.lua`
 ```lua
-['scrapyard'] = {
-	label = 'Scrapyard',
-	defaultDuty = true,
-	offDutyPay = false,
-	grades = {
-        ['0'] = {
-            name = 'Recruit',
-            payment = 50
-        },
-		['1'] = {
-            name = 'Novice',
-            payment = 75
-        },
-		['2'] = {
-            name = 'Experienced',
-            payment = 100
-        },
-		['3'] = {
-            name = 'Advanced',
-            payment = 125
-        },
-		['4'] = {
-            name = 'Manager',
-			isboss = true,
-            payment = 150
-        },
+scrapyard = {
+    label = 'Scrapyard',
+    type = "scrapjob",
+    defaultDuty = true,
+    offDutyPay = false,
+    grades = {
+	['0'] = { name = 'Recruit', payment = 50 },
+	['1'] = { name = 'Novice', payment = 75 },
+	['2'] = { name = 'Experienced', payment = 100 },
+	['3'] = { name = 'Advanced', payment = 125 },
+        ['4'] = { name = 'Manager', isboss = true, payment = 150},
     },
 },
 ```

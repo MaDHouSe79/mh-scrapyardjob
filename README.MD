@@ -29,6 +29,9 @@
 # MH-Scrapyardjob
 - a player scrapyard job to steel any npc vehicle for parts or materials. 
 
+# NOTE for qb-scrapyard script
+- you need to remove or disable the qb-scrapyard script.
+
 ### Dependencies
 - [oxmysql](https://github.com/overextended/oxmysql/releases/tag/v1.9.3) (Required)
 - [qb-core](https://github.com/qbcore-framework/qb-core) (Required)

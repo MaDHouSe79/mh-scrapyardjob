@@ -129,6 +129,7 @@ exports('AddMoney', AddMoney)
 	['turbo']           			= {['name'] = 'turbo', 					    	['label'] = 'Turbo', 					['weight'] = 100, 		['type'] = 'item', 		['image'] = 'turbo.png', 			        	['unique'] = false, 	['useable'] = false, 	['shouldClose'] = false, 	['combinable'] = nil, 	['description'] = 'Turbo'},
 	['tire'] 						= {['name'] = 'tire', 							['label'] = 'tire', 					['weight'] = 100, 		['type'] = 'item', 		['image'] = 'tire.png', 			        	['unique'] = false, 	['useable'] = false, 	['shouldClose'] = false, 	['combinable'] = nil, 	['description'] = 'A car tire'},
 	['stockrim'] 					= {['name'] = 'stockrim', 						['label'] = 'stockrim', 				['weight'] = 100, 		['type'] = 'item', 		['image'] = 'stockrim.png', 		        	['unique'] = false, 	['useable'] = false, 	['shouldClose'] = false, 	['combinable'] = nil, 	['description'] = 'A Stock rim'},
+	['ducttape'] 			= {['name'] = 'ducttape', 						['label'] = 'ducttape', 				['weight'] = 100, 		['type'] = 'item', 		['image'] = 'ducttape.png', 		        	['unique'] = false, 	['useable'] = false, 	['shouldClose'] = false, 	['combinable'] = nil, 	['description'] = 'ducttape'},
 
 ```
 

@@ -866,23 +866,23 @@ local function StealNPCVehicle()
                                                         end, {props = props, model = props.model, plate = props.plate, modelname = displaytext:lower(), vehicle = veh}) 
                                                         RunCoolDown()
                                                         Reset()
-                                                    end, function() -- Censel
+                                                    end, function() -- Cansel
                                                         Reset()
                                                         QBCore.Functions.Notify(Lang:t('notify.cancel'), "error")
                                                     end)
-                                                end, function() -- Censel
+                                                end, function() -- Cansel
                                                     Reset()
                                                     QBCore.Functions.Notify(Lang:t('notify.cancel'), "error")
                                                 end)
-                                            end, function() -- Censel
+                                            end, function() -- Cansel
                                                 Reset()
                                                 QBCore.Functions.Notify(Lang:t('notify.cancel'), "error")
                                             end)
-                                        end, function() -- Censel
+                                        end, function() -- Cansel
                                             Reset()
                                             QBCore.Functions.Notify(Lang:t('notify.cancel'), "error")
                                         end)
-                                    end, function() -- Censel
+                                    end, function() -- Cansel
                                         Reset()
                                         QBCore.Functions.Notify(Lang:t('notify.cancel'), "error")
                                     end)                   

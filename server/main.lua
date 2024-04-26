@@ -386,8 +386,9 @@ QBCore.Functions.CreateCallback("mh-scrapyardjob:server:savenpcvehicle", functio
         Citizen.Wait(500)
         local plate = GeneratePlate()
         data.props.plate = plate
-        MySQL.Async.insert('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, state, garage) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', {
-            Player.PlayerData.license, Player.PlayerData.citizenid, data.modelname, GetHashKey(data.model), json.encode(data.props), plate, 1, 'pillboxgarage'
+	local status = {fuel=100,brakes=100,axle=100,radiator=100,clutch=100}
+        MySQL.Async.insert('INSERT INTO player_vehicles (license, citizenid, vehicle, hash, mods, plate, state, garage, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', {
+            Player.PlayerData.license, Player.PlayerData.citizenid, data.modelname, data.model, json.encode(data.props), plate, 1, Config.DefaultGarage, json.encode(status)
         })
         Citizen.Wait(20)
         if IsVehicleOwner(Player.PlayerData.citizenid, plate) then

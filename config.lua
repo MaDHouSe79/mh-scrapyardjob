@@ -31,6 +31,8 @@ Config.InteractButton = 38      -- interact key (E)
 Config.PayMoneyToJobCompany  = true -- pay to the company
 Config.JobCanTapFrameNumbers = true -- company can tap framenumbers of stolen npc vehicles
 ---------------------------------------------------------------
+Config.DefaultGarage = "legionsquare" -- default garage, when scrapping this is the garage where the vehicle is parked.
+---------------------------------------------------------------
 
 Config.Access = {
     ['public'] = false,                    -- this allows all players only to scrap any npc vehicles for materials (public access) (when false, players still crap there own vehicle not npc vehicles)

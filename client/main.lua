@@ -833,7 +833,7 @@ local function StealNPCVehicle()
                                             animDict = "mini@repair",
                                             anim = "fixing_a_ped"
                                         }, {}, {}, function() -- Done
-                                            QBCore.Functions.Progressbar("animation2", Lang:t('progressbar.info3'), Config.SteelTime, false, true,{
+                                            QBCore.Functions.Progressbar("animation3", Lang:t('progressbar.info3'), Config.SteelTime, false, true,{
                                                 disableMovement = true,
                                                 disableCarMovement = true,
                                                 disableMouse = false,
@@ -842,7 +842,7 @@ local function StealNPCVehicle()
                                                 animDict = "anim@amb@business@weed@weed_inspecting_lo_med_hi@",
                                                 anim = "weed_spraybottle_crouch_base_inspector"
                                             }, {}, {}, function() -- Done
-                                                QBCore.Functions.Progressbar("animation3", Lang:t('progressbar.info4'), Config.SteelTime, false, true,{
+                                                QBCore.Functions.Progressbar("animation4", Lang:t('progressbar.info4'), Config.SteelTime, false, true,{
                                                     disableMovement = true,
                                                     disableCarMovement = true,
                                                     disableMouse = false,
@@ -852,7 +852,7 @@ local function StealNPCVehicle()
                                                     anim = "fixing_a_ped"
                                                 }, {}, {}, function() -- Done
                                                     TaskStartScenarioInPlace(PlayerPedId(), 'WORLD_HUMAN_MAID_CLEAN', 0, true)
-                                                    QBCore.Functions.Progressbar("animation4", Lang:t('progressbar.info2'), Config.SteelTime, false, true,{
+                                                    QBCore.Functions.Progressbar("animation5", Lang:t('progressbar.info2'), Config.SteelTime, false, true,{
                                                         disableMovement = true,
                                                         disableCarMovement = true,
                                                         disableMouse = false,

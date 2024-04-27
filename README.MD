@@ -37,6 +37,7 @@
 - [qb-core](https://github.com/qbcore-framework/qb-core) (Required)
 - [qb-inventory](https://github.com/qbcore-framework/qb-inventory) (Required)
 - [PolyZone](https://github.com/mkafrin/PolyZone) (Required)
+- [mh-modelnames](https://github.com/MaDHouSe79/mh-modelnames)
 
 
 ### Screenshot

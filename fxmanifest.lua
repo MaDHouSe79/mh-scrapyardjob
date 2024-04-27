@@ -35,7 +35,7 @@ dependencies {
     'oxmysql',
     'qb-core',
     'PolyZone',
-    'mh-modelnames',
+    'mh-vehiclemodels',
 }
 
 lua54 'yes'

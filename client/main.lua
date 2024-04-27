@@ -800,7 +800,7 @@ local function StealNPCVehicle()
                     Reset()
                 else
                     local props = QBCore.Functions.GetVehicleProperties(veh)
-                    local displaytext = GetLabelText(GetDisplayNameFromVehicleModel(GetEntityModel(veh)))
+                    local displaytext = exports['mh-modelnames']:GetModelName(veh)
                     local body = GetVehicleBodyHealth(veh)
                     if math.floor(body) < Config.MinDamage then
                         return QBCore.Functions.Notify(Lang:t('notify.to_much_damage'), "error", 5000)

@@ -631,17 +631,20 @@ local function DropVehicle()
     end
 end
 
-local function GetClosestPlayer()
+local function GetClosestPlayer(coords)
     local closestPlayers = GetActivePlayers()
     local closestPlayer = -1
     local closestDistance = -1
+    local noplayersFound = false
     for i = 1, #closestPlayers, 1 do
         if closestPlayers[i] ~= PlayerId() and closestPlayers[i] ~= -1 then
-            local pos = GetEntityCoords(GetPlayerPed(closestPlayers[i]))
-            local distance = #(pos - coords)
-            if closestDistance == -1 or closestDistance > distance then
-                closestPlayer = closestPlayers[i]
-                closestDistance = distance
+            if GetPlayerPed(closestPlayers[i]) then
+                local pos = GetEntityCoords(GetPlayerPed(closestPlayers[i]))
+                local distance = #(pos - coords)
+                if closestDistance == -1 or closestDistance > distance then
+                    closestPlayer = closestPlayers[i]
+                    closestDistance = distance
+                end
             end
         end
     end

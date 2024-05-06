@@ -654,7 +654,7 @@ end
 local function IsAPlayerAround()
     local isAround = false
     local coords = GetEntityCoords(PlayerPedId())
-    local closestPlayer, closestDistance = GetClosestPlayer()
+    local closestPlayer, closestDistance = GetClosestPlayer(coords)
     if closestPlayer ~= -1 or closestDistance ~= -1 then isAround = true end
     return isAround
 end

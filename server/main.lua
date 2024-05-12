@@ -500,6 +500,7 @@ end)
 -- Buy Stash Item
 RegisterNetEvent('mh-scrapyardjob:server:buyStashItem', function(item, amount, currentBase, currentZone)
     local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
     local result = MySQL.scalar.await('SELECT items FROM stashitems WHERE stash = ?', {currentBase})
     if result then
         local topay = 0
@@ -511,7 +512,12 @@ RegisterNetEvent('mh-scrapyardjob:server:buyStashItem', function(item, amount, c
                 end
             end
         end
-        UpdateStash(src, currentBase, item, amount, topay)
+        if Player.PlayerData.money.cash >= topay then
+            if Player.Functions.RemoveMoney('cash', topay, "scrapyard-paid") then
+                exports['qb-banking']:AddMoney('scrapyard', topay, 'player-buy-item')
+                UpdateStash(src, currentBase, item, amount, topay)
+            end
+        end        
     else
         TriggerClientEvent('mh-scrapyardjob:client:close', src)
         TriggerClientEvent('QBCore:Notify', src, Lang:t('notify.not_in_stock'), 'error', 5000)

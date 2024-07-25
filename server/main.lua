@@ -99,13 +99,13 @@ local function GiveRawMetarials(id)
             local item = Config.ScrapItems[math.random(1, #Config.ScrapItems)]
             local amount = math.random(Config.MinItems, Config.MaxItems)
             Player.Functions.AddItem(item, amount)
-            TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items[item], 'add', amount)
+            TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items[item], 'add', amount)
             Citizen.Wait(800)
         end
         if math.random(1, 8) == math.random(1, 8) then
             local random = math.random(10, 20)
             Player.Functions.AddItem("rubber", random)
-            TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["rubber"], 'add', random)
+            TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items["rubber"], 'add', random)
         end
     end
 end
@@ -115,84 +115,84 @@ local function GiveCarParts(id)
     local Player = QBCore.Functions.GetPlayer(id)
     if Player then
         Player.Functions.AddItem("rims", 4)
-        TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["rims"], 'add', 4)
+        TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items["rims"], 'add', 4)
         Citizen.Wait(500)
         --
         Player.Functions.AddItem("tires", 4)
-        TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["tires"], 'add', 4)
+        TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items["tires"], 'add', 4)
         Citizen.Wait(500)
         --
         Player.Functions.AddItem("transmission1", 1)
-        TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["transmission1"], 'add', 1)
+        TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items["transmission1"], 'add', 1)
         Citizen.Wait(500)
         --
         Player.Functions.AddItem("engine1", 1)
-        TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["engine1"], 'add', 1)
+        TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items["engine1"], 'add', 1)
         Citizen.Wait(500)
         --
         Player.Functions.AddItem("brakes1", 1)
-        TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["brakes1"], 'add', 1)
+        TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items["brakes1"], 'add', 1)
         Citizen.Wait(500)
         --
         Player.Functions.AddItem("suspension1", 1)
-        TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["suspension1"], 'add', 1)
+        TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items["suspension1"], 'add', 1)
         Citizen.Wait(500)
         --
         Player.Functions.AddItem("headlights", 1)
-        TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["headlights"], 'add', 1)
+        TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items["headlights"], 'add', 1)
         Citizen.Wait(500)
         --
         Player.Functions.AddItem("hood", 1)
-        TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["hood"], 'add', 1)
+        TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items["hood"], 'add', 1)
         Citizen.Wait(500)
         --
         Player.Functions.AddItem("roof", 1)
-        TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["roof"], 'add', 1)
+        TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items["roof"], 'add', 1)
         Citizen.Wait(500)
         --
         Player.Functions.AddItem("spoiler", 1)
-        TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["spoiler"], 'add', 1)
+        TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items["spoiler"], 'add', 1)
         Citizen.Wait(500)
         --
         Player.Functions.AddItem("bumper", 2)
-        TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["bumper"], 'add', 2)
+        TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items["bumper"], 'add', 2)
         Citizen.Wait(500)
         --
         Player.Functions.AddItem("skirts", 2)
-        TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["skirts"], 'add', 2)
+        TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items["skirts"], 'add', 2)
         Citizen.Wait(500)
         --
         Player.Functions.AddItem("exhaust", 1)
-        TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["exhaust"], 'add', 1)
+        TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items["exhaust"], 'add', 1)
         Citizen.Wait(500)
         --
         Player.Functions.AddItem("seat", 2)
-        TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["seat"], 'add', 2)
+        TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items["seat"], 'add', 2)
         Citizen.Wait(500)
          --
         Player.Functions.AddItem("sparkplugs", 4)
-        TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["sparkplugs"], 'add', 4)
+        TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items["sparkplugs"], 'add', 4)
         Citizen.Wait(500)
          --
         Player.Functions.AddItem("carbattery", 1)
-        TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["carbattery"], 'add', 1)
+        TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items["carbattery"], 'add', 1)
         Citizen.Wait(500)
          --
         Player.Functions.AddItem("axleparts", 2)
-        TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["axleparts"], 'add', 2)
+        TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items["axleparts"], 'add', 2)
         Citizen.Wait(500)
          --
 
         if math.random(1, 8) == math.random(1, 10) then
             Player.Functions.AddItem("turbo", 1)
-            TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items["turbo"], 'add', 1)
+            TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items["turbo"], 'add', 1)
         end
         
         for i = 1, math.random(2, 4), 1 do
             local item = Config.ScrapItems[math.random(1, #Config.ScrapItems)]
             local amount = math.random(Config.MinItems, Config.MaxItems)
             Player.Functions.AddItem(item, amount)
-            TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items[item], 'add', amount)
+            TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items[item], 'add', amount)
             Citizen.Wait(800)
         end
     end
@@ -215,7 +215,7 @@ local function UpdateStash(id, stashId, item, amount, price)
                                 ['items'] = json.encode(stashItems)
                             })
                             Player.Functions.AddItem(item, amount)
-                            TriggerClientEvent('inventory:client:ItemBox', id, QBCore.Shared.Items[item], "add", amount)
+                            TriggerClientEvent('qb-inventory:client:ItemBox', id, QBCore.Shared.Items[item], "add", amount)
                             if Config.PayMoneyToJobCompany then exports['qb-management']:AddMoney(stashId, price) end
                         else
                             TriggerClientEvent('QBCore:Notify', id, Lang:t('notify.not_enough_money'), 'error')
@@ -279,10 +279,10 @@ local function GetStashItems(stashId, action)
                         end
                     end
                 end
-			end
-		end
+	    end
 	end
-	return items, tableLength(items)
+    end
+    return items, tableLength(items)
 end
 
 
@@ -489,7 +489,7 @@ RegisterNetEvent('mh-scrapyardjob:server:RemoveItems', function(action)
         if tmpData[i] then
             if tmpData[i].name ~= "oxycutter" or tmpData[i].name ~= "screwdriverset" or tmpData[i].name ~= "advancedlockpick" then
                 Player.Functions.RemoveItem(tmpData[i].name, tmpData[i].needed)
-                TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[tmpData[i].name], "remove", tmpData[i].needed)
+                TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items[tmpData[i].name], "remove", tmpData[i].needed)
                 Citizen.Wait(500)
             end
         end

@@ -5,7 +5,7 @@
 local user = "MaDHouSe79"
 local script = "mh-steelnpcvehicles"
 
-local resourceName = mil
+local resourceName = nil
 
 local function checkVersion(err, responseText, headers)
     curVersion = LoadResourceFile(GetCurrentResourceName(), "version")

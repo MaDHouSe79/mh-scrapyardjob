@@ -5,7 +5,7 @@
 Config = {}
 ---------------------------------------------------------------
 
-Config.UseMHVehiclekeys = true -- you need mh-vehiclekeys and mh-vehiclekeyitem, this is required if this value is true
+Config.UseMHVehiclekeys = false -- you need mh-vehiclekeys and mh-vehiclekeyitem, this is required if this value is true
 Config.UsePsDispatch = true -- you need ps-dispatch for this
 
 -- Use qb-target interactions (don't change this, go to your server.cfg and add setr UseTarget true)
